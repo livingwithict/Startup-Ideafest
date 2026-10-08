@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@import "./assets/fonts/fonts.css";
+
+@theme {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* surfaces */
+  --color-bg: #f6f8fb;
+  --color-paper: #ffffff;
+  --color-surface: #edf1f7;
+  --color-line: #d8e0ec;
+  --color-navy: #0a2347;
+
+  /* ink */
+  --color-ink: #0b1c33;
+  --color-ink-dim: #4a5b78;
+
+  /* brand blue is the TSCM Aerospace navy; teal is the fest wordmark's teal, darkened for AA */
+  --color-brand: #105088;
+  --color-brand-600: #0b3a6a;
+  --color-brand-50: #e5eef8;
+  --color-teal: #0e7a83;
+  --color-teal-50: #dcf0f1;
+  /* the fest logo's flame, used once or twice per page at most */
+  --color-flare: #b85e12;
+  --color-flare-50: #fbeadb;
+}
+
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* faint engineering-paper grid for hero bands */
+.grid-bg {
+  background-image:
+    linear-gradient(rgb(16 80 136 / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(16 80 136 / 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* scroll reveal: short fade and rise, once */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal[data-in] {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes marquee { to { transform: translateX(-50%); } }
+.orbit { animation: spin 90s linear infinite; transform-origin: 250px 250px; }
+.orbit-rev { animation: spin 140s linear infinite reverse; transform-origin: 250px 250px; }
+.marquee-track { animation: marquee 50s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .orbit, .orbit-rev, .marquee-track { animation: none; }
+}
